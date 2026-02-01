@@ -29,6 +29,7 @@ builder.Services.AddDbContext<RetailShopDbContext>(options =>
     b => b.MigrationsAssembly("RetailShop.Infrastructure"))); //b => b.MigrationsAssembly("RetailShop.Infrastructure")
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
