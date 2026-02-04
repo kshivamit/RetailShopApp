@@ -14,6 +14,24 @@ namespace RetailShop.API.Controllers
             _service = service;
         }
 
+        [HttpGet]
+        public async Task<IEnumerable<ProductResponseDto>> GetAllProduct()
+        {
+            return (await _service.GetAllAsync());
+        }
+        [HttpGet]
+        [Route("{id:guid}")]
+        public async Task<ActionResult<ProductResponseDto>> GetProductById([FromRoute] Guid id)
+        {
+            var product = await _service.GetByIdAsync(id);
+            if (product == null)
+            {
+                return NotFound("No product found");
+            }
+            return Ok(product);
+
+        }
+
         [HttpPost]
         public async Task<ActionResult> CreateProduct(ProductCreateDto dto)
         {
@@ -27,10 +45,19 @@ namespace RetailShop.API.Controllers
                 return BadRequest("Error creating product");
             }
         }
-        [HttpGet]
-        public async Task<IEnumerable<ProductResponseDto>> GetAllProduct()
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateProduct(Guid id, ProductUpdateDto dto)
         {
-            return (await _service.GetAllAsync());
+            await _service.UpdateAsync(id, dto);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteProduct(Guid id)
+        {
+            await _service.DeleteAsync(id);
+            return NoContent();
         }
     }
 }

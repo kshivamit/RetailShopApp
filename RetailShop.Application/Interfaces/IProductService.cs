@@ -12,7 +12,7 @@ namespace RetailShop.Application.Interfaces
         Task<Guid> CreateAsync(ProductCreateDto dto);
         Task<ProductResponseDto> GetByIdAsync(Guid id);
         Task<IEnumerable<ProductResponseDto>> GetAllAsync();
-        Task UpdateAsync(Guid id, ProductCreateDto dto);
+        Task UpdateAsync(Guid id, ProductUpdateDto dto);
         Task DeleteAsync(Guid id);
 
     }

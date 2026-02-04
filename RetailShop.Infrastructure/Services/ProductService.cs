@@ -37,11 +37,6 @@ namespace RetailShop.Infrastructure.Services
             return product.Id;
         }
 
-        public Task DeleteAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<ProductResponseDto>> GetAllAsync()
         {
             return await _context.Products.Include(p => p.Category).Include(p => p.Inventory)
@@ -55,14 +50,49 @@ namespace RetailShop.Infrastructure.Services
                 }).ToListAsync();
         }
 
-        public Task<ProductResponseDto> GetByIdAsync(Guid id)
+        public async Task<ProductResponseDto> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var product =  await _context.Products.Include(p => p.Category).Include(p => p.Inventory)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+            {
+                return null;
+            }
+            else
+            {
+                return new ProductResponseDto
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Price = product.Price,
+                    CategoryName = product.Category.Name,
+                    AvailableStock = product.Inventory.Quantity
+                };
+            }
         }
 
-        public Task UpdateAsync(Guid id, ProductCreateDto dto)
+        public async Task UpdateAsync(Guid id, ProductUpdateDto dto)
         {
-            throw new NotImplementedException();
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
+                throw new Exception("Product not found");
+
+            product.Name = dto.Name;
+            product.Price = dto.Price;
+            product.Description = dto.Description;
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
+                throw new Exception("Product not found");
+
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
         }
     }
 }
