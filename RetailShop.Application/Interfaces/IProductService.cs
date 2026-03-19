@@ -1,4 +1,5 @@
-﻿using RetailShop.Application.DTOs.Product;
+﻿using RetailShop.Application.Common.Pagination;
+using RetailShop.Application.DTOs.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace RetailShop.Application.Interfaces
         Task<IEnumerable<ProductResponseDto>> GetAllAsync();
         Task UpdateAsync(Guid id, ProductUpdateDto dto);
         Task DeleteAsync(Guid id);
+        Task<PagedResult<ProductResponseDto>> GetPagedAsync(PaginationParams paginationParams);
 
     }
 }

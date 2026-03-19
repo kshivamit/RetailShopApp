@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RetailShop.Application.Common.Pagination;
 using RetailShop.Application.DTOs.Product;
 using RetailShop.Application.Interfaces;
 using RetailShop.Domain.Entities;
@@ -93,6 +94,32 @@ namespace RetailShop.Infrastructure.Services
 
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<PagedResult<ProductResponseDto>> GetPagedAsync(PaginationParams paginationParams)
+        {
+            var query = _context.Products.Include(p => p.Category).Include(p => p.Inventory).AsQueryable();
+
+            var totalRecords = await query.CountAsync();
+
+            var items = await query.Skip((paginationParams.PageNumber - 1) * paginationParams.ItemPerPage)
+                .Take(paginationParams.ItemPerPage)
+                .Select(p => new ProductResponseDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price,
+                    CategoryName = p.Category.Name,
+                    AvailableStock = p.Inventory.Quantity
+                }).ToListAsync();
+
+            return new PagedResult<ProductResponseDto>
+            {
+                PageNumber = paginationParams.PageNumber,
+                ItemPerPage = paginationParams.ItemPerPage,
+                TotalRecords = totalRecords,
+                Items = items
+            };
         }
     }
 }

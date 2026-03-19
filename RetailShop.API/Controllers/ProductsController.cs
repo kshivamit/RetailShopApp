@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using RetailShop.Application.Common.Pagination;
 using RetailShop.Application.DTOs.Product;
 using RetailShop.Application.Interfaces;
 
@@ -6,6 +8,7 @@ namespace RetailShop.API.Controllers
 {
     [ApiController]
     [Route("api/auth/products")]
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly IProductService _service;
@@ -19,6 +22,7 @@ namespace RetailShop.API.Controllers
         {
             return (await _service.GetAllAsync());
         }
+
         [HttpGet]
         [Route("{id:guid}")]
         public async Task<ActionResult<ProductResponseDto>> GetProductById([FromRoute] Guid id)
@@ -29,7 +33,6 @@ namespace RetailShop.API.Controllers
                 return NotFound("No product found");
             }
             return Ok(product);
-
         }
 
         [HttpPost]
@@ -58,6 +61,13 @@ namespace RetailShop.API.Controllers
         {
             await _service.DeleteAsync(id);
             return NoContent();
+        }
+
+        [HttpGet("paged")]
+        public async Task<IActionResult> GetPaged([FromQuery] PaginationParams paginationParams)
+        {
+            var pagedResult = await _service.GetPagedAsync(paginationParams);
+            return Ok(pagedResult);
         }
     }
 }
