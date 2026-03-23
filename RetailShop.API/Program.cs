@@ -41,6 +41,10 @@ builder.Services.AddDbContext<RetailShopDbContext>(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
+//--- Add Caching ---
+builder.Services.AddMemoryCache();
+builder.Services.AddLazyCache();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
