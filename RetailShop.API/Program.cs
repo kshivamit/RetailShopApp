@@ -7,6 +7,16 @@ using RetailShop.Infrastructure.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowAngular",
+//        policy =>
+//        {
+//            policy.WithOrigins("http://localhost:4200")
+//                  .AllowAnyHeader()
+//                  .AllowAnyMethod();
+//        });
+//});
 
 builder.Services.AddAuthentication("Bearer").AddJwtBearer(
     options=>
@@ -29,6 +39,11 @@ builder.Services.AddDbContext<RetailShopDbContext>(options =>
     b => b.MigrationsAssembly("RetailShop.Infrastructure"))); //b => b.MigrationsAssembly("RetailShop.Infrastructure")
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+//--- Add Caching ---
+builder.Services.AddMemoryCache();
+builder.Services.AddLazyCache();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -36,6 +51,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+//app.UseCors("AllowAngular");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
