@@ -1,0 +1,25 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(114, 124, 92);
+}
+.nav h2
+{
+    color: #7e1010;
+    align-items: center;
+    font-size: 30px;
+    margin-left: 5%;
+}
+.nav ul {
+    display: flex;
+    list-style-type: none;
+}
+.nav ul li {
+    padding: 15px;
+    color: blueviolet;
+    margin-left: 0px;
+}
+.search-box {
+    margin: auto;
+    align-items: center;
+}
