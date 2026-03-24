@@ -1,0 +1,16 @@
+<nav class="nav">   
+    <h2 >RetailShop</h2>
+    <div class="search-box">
+        <input type="text" placeholder="Search for products"/>
+        <button>Search</button>
+    </div>
+    <ul>
+
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">About Us</a></li>
+        <li *ngIf="isLoginedIn"><button mat-button (click)="openLogin()">Login</button></li>
+        <li *ngIf="!isLoginedIn"><button mat-button (click)="logout()">Logout</button></li>
+        <li><a href="#">Cart(0)</a></li>
+    </ul>
+</nav>
