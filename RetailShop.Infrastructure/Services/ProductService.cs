@@ -100,6 +100,21 @@ namespace RetailShop.Infrastructure.Services
         {
             var query = _context.Products.Include(p => p.Category).Include(p => p.Inventory).AsQueryable();
 
+            query = paginationParams.SortBy?.ToLower() switch
+            {
+                "price" => paginationParams.SortOrder == "desc"
+                    ? query.OrderByDescending(p => p.Price)
+                    : query.OrderBy(p => p.Price),
+
+                "createdat" => paginationParams.SortOrder == "desc"
+                    ? query.OrderByDescending(p => p.CreatedAt)
+                    : query.OrderBy(p => p.CreatedAt),
+
+                _ => paginationParams.SortOrder == "desc"
+                    ? query.OrderByDescending(p => p.Name)
+                    : query.OrderBy(p => p.Name)
+            };
+
             var totalRecords = await query.CountAsync();
 
             var items = await query.Skip((paginationParams.PageNumber - 1) * paginationParams.ItemPerPage)

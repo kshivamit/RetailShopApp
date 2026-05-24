@@ -19,5 +19,9 @@ namespace RetailShop.Application.Common.Pagination
             get => _itemPerPage;
             set => _itemPerPage = (value > MaxPageSize) ? MaxPageSize : value;
         }
+
+        //Added fields for sorting
+        public string SortBy { get; set; } = "name"; // default
+        public string SortOrder { get; set; } = "asc"; // asc or desc
     }
 }

@@ -45,7 +45,7 @@ namespace RetailShop.API.Controllers
         [HttpGet]
         [Route("{id:guid}")]
         [AllowAnonymous]
-        public async Task<ActionResult<ProductResponseDto>> GetProductById([FromRoute] Guid id)
+        public async Task<ActionResult<ProductResponseDto>> GetProductById(Guid id)
         {
             if(!_cache.TryGetValue("productKey", out ActionResult<ProductResponseDto> product))
             {
@@ -94,9 +94,10 @@ namespace RetailShop.API.Controllers
         }
 
         [HttpGet("paged")]
-        public async Task<IActionResult> GetPaged([FromQuery] PaginationParams paginationParams)
+        [AllowAnonymous]
+        public async Task<IActionResult> GetPaged([FromQuery]PaginationParams pagination)
         {
-            var pagedResult = await _service.GetPagedAsync(paginationParams);
+            var pagedResult = await _service.GetPagedAsync(pagination);
             return Ok(pagedResult);
         }
     }
