@@ -58,7 +58,7 @@ namespace RetailShop.Infrastructure.Services
 
             if (product == null)
             {
-                return null;
+                throw new Exception("Product not found");
             }
             else
             {

@@ -1,0 +1,59 @@
+<section class="about-container">
+
+    <div class="hero">
+
+        <h1>About {{ companyName }}</h1>
+
+        <p>
+            Welcome to <strong>{{ companyName }}</strong>,
+            your trusted online shopping destination.
+            We aim to provide high-quality products at affordable prices
+            with an exceptional shopping experience.
+        </p>
+
+    </div>
+
+    <div class="about-content">
+
+        <div class="card">
+
+            <h2>Our Mission</h2>
+
+            <p>
+                Our mission is to simplify online shopping by offering
+                premium products, secure payments, and fast delivery
+                while ensuring complete customer satisfaction.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Why Choose Us?</h2>
+
+            <ul>
+                 @for (feature of features; track feature) 
+                 {
+                    <li>
+                    <strong>{{ feature }}</strong>
+                    </li>
+                }
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="team">
+
+        <h2>Our Vision</h2>
+
+        <p>
+            We strive to become one of the leading e-commerce platforms
+            by delivering innovative shopping experiences powered by
+            modern technology and outstanding customer service.
+        </p>
+
+    </div>
+
+</section>

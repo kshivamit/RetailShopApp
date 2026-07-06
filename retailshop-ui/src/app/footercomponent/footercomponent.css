@@ -1,0 +1,51 @@
+footer {
+
+    margin-top: 30px;
+
+    background: #2c3e50;
+
+    color: white;
+
+}
+
+.footer-container {
+
+    display: flex;
+
+    justify-content: space-around;
+
+    padding: 10px;
+
+}
+
+.footer-container ul {
+
+    list-style: none;
+
+    padding: 0;
+
+}
+
+.footer-container a {
+
+    color: white;
+
+    text-decoration: none;
+
+}
+
+.footer-container li {
+
+    margin: 10px 0;
+
+}
+
+.copyright {
+
+    text-align: center;
+
+    padding: 10px;
+
+    background: #1d2b36;
+
+}

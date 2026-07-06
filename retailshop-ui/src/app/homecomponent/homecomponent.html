@@ -1,16 +1,60 @@
-<nav class="nav">   
-    <h2 >RetailShop</h2>
-    <div class="search-box">
-        <input type="text" placeholder="Search for products"/>
-        <button>Search</button>
-    </div>
-    <ul>
+<!-- Hero Section -->
 
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="#">About Us</a></li>
-        <li *ngIf="isLoginedIn"><button mat-button (click)="openLogin()">Login</button></li>
-        <li *ngIf="!isLoginedIn"><button mat-button (click)="logout()">Logout</button></li>
-        <li><a href="#">Cart(0)</a></li>
-    </ul>
-</nav>
+<section class="hero">
+
+    <div class="hero-content">
+        <h1>Welcome to RetailShop</h1>
+
+        <p>
+            Discover quality products at affordable prices.
+            Fast delivery, secure payment and hassle-free returns.
+        </p>
+
+        <button routerLink="/products">
+            Shop Now
+        </button>
+    </div>
+
+</section>
+
+<!-- Featured Section -->
+
+<section class="featured">
+
+    <h2>Why Shop With Us?</h2>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <h3>🚚 Fast Delivery</h3>
+
+            <p>
+                Delivery across India with trusted partners.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <h3>💳 Secure Payment</h3>
+
+            <p>
+                Safe and encrypted online payment.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <h3>⭐ Premium Quality</h3>
+
+            <p>
+                Carefully selected products from verified sellers.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>

@@ -10,7 +10,7 @@ using RetailShop.Domain.Entities;
 namespace RetailShop.API.Controllers
 {
     [ApiController]
-    [Route("api/auth/products")]
+    [Route("api/products")]
     [Authorize]
     public class ProductsController : Controller
     {
@@ -55,10 +55,10 @@ namespace RetailShop.API.Controllers
                     .SetPriority(CacheItemPriority.Normal)
                     .SetSize(1024);
                 product = await _service.GetByIdAsync(id);
-                if (product == null)
-                {
-                    return NotFound("No product found");
-                }
+                //if (product == null)
+                //{
+                //    return NotFound("No product found");
+                //}
                 _cache.Set("productKey", product, cacheEntryOption);
                 return product;
             }
@@ -75,7 +75,8 @@ namespace RetailShop.API.Controllers
             }
             catch
             {
-                return BadRequest("Error creating product");
+                //return BadRequest("Error creating product");
+                throw new Exception("Error creating product");
             }
         }
 
