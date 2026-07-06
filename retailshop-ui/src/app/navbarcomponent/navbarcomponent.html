@@ -1,0 +1,69 @@
+<nav class="navbar">
+
+    <div class="logo">
+
+        <a routerLink="/">
+            RetailShop
+        </a>
+
+    </div>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            [(ngModel)]="searchText"
+            placeholder="Search products..." />
+
+        <button
+            (click)="searchProduct()">
+
+            Search
+
+        </button>
+
+    </div>
+
+    <ul class="nav-links">
+
+        <li>
+            <a routerLink="/">Home</a>
+        </li>
+
+        <li>
+            <a routerLink="/products">Products</a>
+        </li>
+
+        <li>
+            <a routerLink="/abouts">About Us</a>
+        </li>
+
+        <li>
+            <a routerLink="/cart">
+                Cart (0)
+            </a>
+        </li>
+
+        <li *ngIf="isLoginedIn">
+
+            <button (click)="openLogin()">
+
+                Login
+
+            </button>
+
+        </li>
+
+        <li *ngIf="!isLoginedIn">
+
+            <button (click)="logout()">
+
+                Logout
+
+            </button>
+
+        </li>
+
+    </ul>
+
+</nav>

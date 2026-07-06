@@ -1,0 +1,15 @@
+<div class="product-list">
+  <div *ngIf="loading">Loading products...</div>
+  <div *ngIf="error" class="error">{{error}}</div>
+
+  <div class="products">
+    <mat-card *ngFor="let p of products" class="product-card">
+      <img *ngIf="p.image" [src]="p.image" alt="{{p.name}}" class="product-image" />
+      <mat-card-title>{{p.name}}</mat-card-title>
+      <mat-card-content>
+        <p>{{p.description}}</p>
+        <p class="price">${{p.price}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
