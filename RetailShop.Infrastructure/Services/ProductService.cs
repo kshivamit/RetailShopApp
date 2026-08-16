@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RetailShop.Application.Common.Pagination;
 using RetailShop.Application.DTOs.Product;
+using RetailShop.Application.Exceptions;
 using RetailShop.Application.Interfaces;
 using RetailShop.Domain.Entities;
 using RetailShop.Infrastructure.Data;
@@ -58,7 +59,7 @@ namespace RetailShop.Infrastructure.Services
 
             if (product == null)
             {
-                throw new Exception("Product not found");
+                throw new NotFoundException($"Product with ID '{id}' was not found.");
             }
             else
             {
@@ -77,7 +78,7 @@ namespace RetailShop.Infrastructure.Services
         {
             var product = await _context.Products.FindAsync(id);
             if (product == null)
-                throw new Exception("Product not found");
+                throw new NotFoundException($"Product with ID '{id}' was not found.");
 
             product.Name = dto.Name;
             product.Price = dto.Price;
@@ -90,7 +91,7 @@ namespace RetailShop.Infrastructure.Services
         {
             var product = await _context.Products.FindAsync(id);
             if (product == null)
-                throw new Exception("Product not found");
+                throw new NotFoundException($"Product with ID '{id}' was not found.");
 
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
