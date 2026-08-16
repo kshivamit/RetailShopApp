@@ -37,7 +37,7 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer(
 
 builder.Services.AddDbContext<RetailShopDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("RetailShopConnectionString"),
-    b => b.MigrationsAssembly("RetailShop.Infrastructure"))); //b => b.MigrationsAssembly("RetailShop.Infrastructure")
+    b => b.MigrationsAssembly("RetailShop.Infrastructure")));
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IProductService, ProductService>();
@@ -65,6 +65,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
